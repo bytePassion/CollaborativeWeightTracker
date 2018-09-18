@@ -1,13 +1,20 @@
-import { Module } from '@nestjs/common';
-import { GraphQLModule } from '@nestjs/graphql';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import {Module} from '@nestjs/common';
+import {GraphQLModule} from '@nestjs/graphql';
+import {WeightEntriesModule} from "./weight/weight-entries.module";
+import {join} from "path";
 
 @Module({
-  imports: [GraphQLModule.forRoot({
-      typePaths: ['./**/*.graphql']
-  })],
-  controllers: [AppController],
-  providers: [AppService],
+    imports: [
+        WeightEntriesModule,
+        GraphQLModule.forRoot({
+            typePaths: ['./**/*.graphql'],
+            installSubscriptionHandlers: true,
+            definitions: {
+                path: join(process.cwd(), 'src/graphql.schema.ts'),
+                outputAs: 'class',
+            },
+        })
+    ]
 })
-export class AppModule {}
+export class AppModule {
+}

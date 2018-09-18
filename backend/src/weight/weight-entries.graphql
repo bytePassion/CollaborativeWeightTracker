@@ -1,0 +1,24 @@
+
+type Query {
+    getWeightEntries: [WeightEntry]
+    weightEntry(id: ID!): WeightEntry
+}
+
+type Mutation {
+    createWeightEntry(createWeightEntryInput: CreateWeightEntryInput): WeightEntry
+}
+
+type Subscription {
+    weightEntryCreated: WeightEntry
+}
+
+type WeightEntry {
+    id: Int
+    weight: Float
+    timestamp: Int
+}
+
+input CreateWeightEntryInput {
+    weight: Float
+    timestamp: Int
+}
