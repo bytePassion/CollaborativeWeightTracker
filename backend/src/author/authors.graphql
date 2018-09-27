@@ -1,0 +1,9 @@
+type Author {
+    name: String,
+    gender: Gender
+}
+
+enum Gender {
+    male,
+    female
+}

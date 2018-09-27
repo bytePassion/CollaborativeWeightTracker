@@ -1,10 +1,20 @@
-export class CreateWeightEntryInput {
+export enum Gender {
+    male = "male",
+    female = "female"
+}
+
+export class WeightEntryInput {
     weight?: number;
     timestamp?: number;
 }
 
+export class Author {
+    name?: string;
+    gender?: Gender;
+}
+
 export abstract class IMutation {
-    abstract createWeightEntry(createWeightEntryInput?: CreateWeightEntryInput): WeightEntry | Promise<WeightEntry>;
+    abstract createWeightEntry(createWeightEntryInput?: WeightEntryInput): WeightEntry | Promise<WeightEntry>;
 }
 
 export abstract class IQuery {
@@ -23,4 +33,5 @@ export class WeightEntry {
     id?: number;
     weight?: number;
     timestamp?: number;
+    author?: Author;
 }

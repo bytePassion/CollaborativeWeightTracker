@@ -5,7 +5,7 @@ type Query {
 }
 
 type Mutation {
-    createWeightEntry(createWeightEntryInput: CreateWeightEntryInput): WeightEntry
+    createWeightEntry(createWeightEntryInput: WeightEntryInput): WeightEntry
 }
 
 type Subscription {
@@ -16,9 +16,10 @@ type WeightEntry {
     id: Int
     weight: Float
     timestamp: Int
+    author: Author
 }
 
-input CreateWeightEntryInput {
+input WeightEntryInput {
     weight: Float
     timestamp: Int
 }

@@ -1,9 +1,9 @@
 import {Injectable} from "@nestjs/common";
-import {WeightEntry} from "../graphql.schema";
+import {Gender, WeightEntry} from "../graphql.schema";
 
 @Injectable()
 export class WeightEntriesService {
-    private readonly weightEntries: WeightEntry[] = [{id: 1, weight: 112.5, timestamp: 1234}];
+    private readonly weightEntries: WeightEntry[] = [{id: 1, weight: 112.5, timestamp: 1234, author: {name: 'tester', gender: Gender.male}}];
 
     create(entry: WeightEntry): WeightEntry {
         this.weightEntries.push(entry);

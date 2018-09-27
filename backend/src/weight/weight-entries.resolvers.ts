@@ -4,7 +4,7 @@ import {ParseIntPipe, UseGuards} from "@nestjs/common";
 import {WeightEntriesGuard} from "./weight-entries.guard";
 import {WeightEntry} from "../graphql.schema";
 import {PubSub} from "graphql-subscriptions";
-import {CreateWeightEntryDto} from "./dto/create-weight-entry.dto";
+import {WeightEntryDto} from "./dto/create-weight-entry.dto";
 
 const pubSub = new PubSub();
 
@@ -25,7 +25,7 @@ export class WeightEntriesResolvers {
     }
 
     @Mutation('createWeightEntry')
-    async create(@Args('createWeightEntryInput') args: CreateWeightEntryDto): Promise<WeightEntry> {
+    async create(@Args('createWeightEntryInput') args: WeightEntryDto): Promise<WeightEntry> {
         const createdWeightEntry = await this.weightEntriesService.create(args);
         pubSub.publish('weightEntryCreated', { weightEntryCreated: createdWeightEntry });
         return createdWeightEntry;
