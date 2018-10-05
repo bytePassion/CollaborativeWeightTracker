@@ -25,10 +25,6 @@ export abstract class IQuery {
     abstract temp__(): boolean | Promise<boolean>;
 }
 
-export abstract class ISubscription {
-    abstract weightEntryCreated(): WeightEntry | Promise<WeightEntry>;
-}
-
 export class WeightEntry {
     id?: number;
     weight?: number;

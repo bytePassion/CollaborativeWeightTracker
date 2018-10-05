@@ -1,10 +1,11 @@
-import {Resolver, Args, Mutation, Subscription, Query} from "@nestjs/graphql";
+import {Resolver, Args, Mutation, Query} from "@nestjs/graphql";
 import {WeightEntriesService} from "./weight-entries.service";
 import {ParseIntPipe, UseGuards} from "@nestjs/common";
 import {WeightEntriesGuard} from "./weight-entries.guard";
 import {WeightEntry} from "../graphql.schema";
 import {PubSub} from "graphql-subscriptions";
 import {WeightEntryDto} from "./dto/create-weight-entry.dto";
+import {GqlAuthGuard} from "../auth/gql-auth.guard";
 
 const pubSub = new PubSub();
 
@@ -14,7 +15,7 @@ export class WeightEntriesResolvers {
     constructor(private readonly weightEntriesService: WeightEntriesService){}
 
     @Query('getWeightEntries')
-    @UseGuards(WeightEntriesGuard)
+    @UseGuards(WeightEntriesGuard, GqlAuthGuard)
     async getWeightEntries() {
         return await this.weightEntriesService.findAll();
     }
@@ -29,13 +30,6 @@ export class WeightEntriesResolvers {
         const createdWeightEntry = await this.weightEntriesService.create(args);
         pubSub.publish('weightEntryCreated', { weightEntryCreated: createdWeightEntry });
         return createdWeightEntry;
-    }
-
-    @Subscription('weightEntryCreated')
-    weightEntryCreated() {
-        return {
-            subscribe: () => pubSub.asyncIterator('weightEntryCreated'),
-        };
     }
 }
 

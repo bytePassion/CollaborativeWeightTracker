@@ -11,6 +11,11 @@
     "target": "es6",
     "sourceMap": true,
     "allowJs": true,
+    "lib": [
+      "es6",
+      "dom",
+      "esnext"
+    ],
     "outDir": "./dist",
     "baseUrl": "./src"
   },

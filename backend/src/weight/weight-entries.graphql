@@ -8,10 +8,6 @@ type Mutation {
     createWeightEntry(createWeightEntryInput: WeightEntryInput): WeightEntry
 }
 
-type Subscription {
-    weightEntryCreated: WeightEntry
-}
-
 type WeightEntry {
     id: Int
     weight: Float
