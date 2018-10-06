@@ -116,11 +116,11 @@ cd "%DEPLOYMENT_TARGET%"
 
 ::5. Run TSC
 
-SET TSC="%DEPLOYMENT_TARGET%\node_modules\typescript\bin\tsc"
+SET TSC=%DEPLOYMENT_TARGET%\node_modules\typescript\bin\tsc
 
 echo Building Typescript files.
 
-call :ExecuteCmd "%TSC%"
+call :ExecuteCmd %TSC%
 IF !ERRORLEVEL! NEQ 0 goto error
 
 echo Finished Typescript build.
