@@ -1,6 +1,7 @@
 FROM mhart/alpine-node:8.12
 
 ENV PATH /root/.yarn/bin:$PATH
+ENV  NODE_ENV production
 
 RUN apk update \
   && apk add curl bash binutils tar \

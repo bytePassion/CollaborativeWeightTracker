@@ -13,8 +13,14 @@ export class Author {
     gender?: Gender;
 }
 
+export class LoginInformation {
+    token?: string;
+}
+
 export abstract class IMutation {
     abstract createWeightEntry(createWeightEntryInput?: WeightEntryInput): WeightEntry | Promise<WeightEntry>;
+
+    abstract login(email: string): LoginInformation | Promise<LoginInformation>;
 }
 
 export abstract class IQuery {

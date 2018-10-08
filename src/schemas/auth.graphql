@@ -1,0 +1,7 @@
+type Mutation {
+    login(email: String!): LoginInformation
+}
+
+type LoginInformation {
+    token: String
+}
