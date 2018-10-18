@@ -2,6 +2,7 @@
 type Query {
     getWeightEntries: [WeightEntry]
     weightEntry(id: ID!): WeightEntry
+    getWeightEntriesByUser: [WeightEntry]
 }
 
 type Mutation {
@@ -11,8 +12,14 @@ type Mutation {
 type WeightEntry {
     id: Int
     weight: Float
+    unit: WeightUnit
     timestamp: Int
-    author: Author
+    user: User
+}
+
+enum WeightUnit {
+    kg,
+    lbs
 }
 
 input WeightEntryInput {

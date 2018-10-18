@@ -1,10 +1,11 @@
-type Author {
+type User {
+    id: Int!
     name: String,
     gender: Gender
 }
 
 type Query {
-    
+    user(id: Int!): User
 }
 
 enum Gender {
