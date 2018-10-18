@@ -2,12 +2,10 @@ import {Module} from '@nestjs/common';
 import {GraphQLModule} from '@nestjs/graphql';
 import {WeightEntriesModule} from "./weight/weight-entries.module";
 import {join} from "path";
-import {AuthModule} from "./auth/auth.module";
 
 @Module({
     imports: [
         WeightEntriesModule,
-        AuthModule,
         GraphQLModule.forRoot({
             typePaths: ['./**/*.graphql'],
             context: ({req}) => ({req}),

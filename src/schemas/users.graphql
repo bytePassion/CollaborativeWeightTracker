@@ -3,6 +3,10 @@ type Author {
     gender: Gender
 }
 
+type Query {
+    
+}
+
 enum Gender {
     male,
     female

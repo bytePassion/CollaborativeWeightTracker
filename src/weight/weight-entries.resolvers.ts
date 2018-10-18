@@ -1,11 +1,9 @@
 import {Resolver, Args, Mutation, Query} from "@nestjs/graphql";
 import {WeightEntriesService} from "./weight-entries.service";
-import {ParseIntPipe, UseGuards} from "@nestjs/common";
-import {WeightEntriesGuard} from "./weight-entries.guard";
+import {ParseIntPipe} from "@nestjs/common";
 import {WeightEntry} from "../graphql.schema";
 import {PubSub} from "graphql-subscriptions";
 import {WeightEntryDto} from "./dto/create-weight-entry.dto";
-import {GqlAuthGuard} from "../auth/gql-auth.guard";
 
 const pubSub = new PubSub();
 
@@ -15,7 +13,6 @@ export class WeightEntriesResolvers {
     constructor(private readonly weightEntriesService: WeightEntriesService){}
 
     @Query('getWeightEntries')
-    @UseGuards(WeightEntriesGuard, GqlAuthGuard)
     async getWeightEntries() {
         return await this.weightEntriesService.findAll();
     }
