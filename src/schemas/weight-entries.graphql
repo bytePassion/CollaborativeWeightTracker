@@ -12,15 +12,9 @@ type Mutation {
 type WeightEntry {
     id: Int
     weight: Float
-    unit: WeightUnit
     timestamp: Int
-    user: User
 }
 
-enum WeightUnit {
-    kg,
-    lbs
-}
 
 input WeightEntryInput {
     weight: Float

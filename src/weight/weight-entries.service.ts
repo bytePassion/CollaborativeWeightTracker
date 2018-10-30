@@ -1,30 +1,25 @@
 import {Injectable} from "@nestjs/common";
-import {Gender, WeightEntry, WeightUnit} from "../graphql.schema";
+import {WeightEntry} from "../graphql.schema";
+import  {Model} from 'mongoose';
+import {InjectModel} from "@nestjs/mongoose";
 
 @Injectable()
 export class WeightEntriesService {
-    private readonly weightEntries: WeightEntry[] = [{
-        id: 1,
-        weight: 112.5,
-        unit: WeightUnit.kg,
-        timestamp: 1234,
-        user: {
-            id: 1,
-            name: 'tester',
-            gender: Gender.male
-        }
-    }];
 
-    create(entry: WeightEntry): WeightEntry {
-        this.weightEntries.push(entry);
-        return entry;
+    constructor(@InjectModel('WeightEntry') private readonly weightModel: Model<WeightEntry>) {
+
     }
 
-    findAll(): WeightEntry[] {
-        return this.weightEntries;
+    async create(entry: WeightEntry): Promise<WeightEntry> {
+        const newEntry = new this.weightModel(entry);
+        return await newEntry.save();
     }
 
-    findOneById(id: number): WeightEntry {
-        return this.weightEntries.find(entry => entry.id === id);
+    async findAll(): Promise<WeightEntry[]> {
+        return await this.weightModel.find().exec();
+    }
+
+    async findOneById(id: number): Promise<WeightEntry> {
+        return await this.weightModel.find(id).exec();
     }
 }

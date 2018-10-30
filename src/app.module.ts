@@ -7,7 +7,7 @@ import {join} from "path";
 @Module({
     imports: [
         WeightEntriesModule,
-        MongooseModule.forRoot('mongodb://localhost/nest'),
+        MongooseModule.forRoot('mongodb://localhost/cwt'),
         GraphQLModule.forRoot({
             typePaths: ['./**/*.graphql'],
             context: ({req}) => ({req}),
