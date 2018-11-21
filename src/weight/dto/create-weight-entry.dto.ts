@@ -1,6 +1,13 @@
-import { WeightEntryInput } from '../../graphql.schema';
+import {IsNumber} from "class-validator";
 
-export class WeightEntryDto extends WeightEntryInput {
+export class WeightResponseObject {
+    id: string;
     weight: number;
-    timestamp: number;
+    created: Date;
+    updated: Date;
+}
+
+export class WeightDTO {
+    @IsNumber()
+    readonly weight: number;
 }

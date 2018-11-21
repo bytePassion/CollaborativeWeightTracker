@@ -1,21 +1,16 @@
-import {Module} from '@nestjs/common';
-import {GraphQLModule} from '@nestjs/graphql';
-import {WeightEntriesModule} from "./weight/weight-entries.module";
-import { MongooseModule } from '@nestjs/mongoose';
-import {join} from "path";
+import { Module } from '@nestjs/common';
+import { GraphQLModule } from '@nestjs/graphql';
+import { WeightModule } from "./weight/weight.module";
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
     imports: [
-        WeightEntriesModule,
-        MongooseModule.forRoot('mongodb://localhost/cwt'),
+        WeightModule,
+        TypeOrmModule.forRoot(),
         GraphQLModule.forRoot({
             typePaths: ['./**/*.graphql'],
-            context: ({req}) => ({req}),
+            context: ({ req }) => ({ headers: req.headers }),
             installSubscriptionHandlers: true,
-            definitions: {
-                path: join(process.cwd(), 'src/graphql.schema.ts'),
-                outputAs: 'class',
-            },
         })
     ]
 })

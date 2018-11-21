@@ -3,33 +3,25 @@ export enum Gender {
     female = "female"
 }
 
-export class WeightEntryInput {
+export class WeightInput {
     weight?: number;
     timestamp?: number;
 }
 
-export class Author {
-    name?: string;
-    gender?: Gender;
-}
 
 export abstract class IMutation {
-    abstract createWeightEntry(createWeightEntryInput?: WeightEntryInput): WeightEntry | Promise<WeightEntry>;
+    abstract createWeight(createWeight?: WeightInput): Weight | Promise<Weight>;
 }
 
 export abstract class IQuery {
-    abstract getWeightEntries(): WeightEntry[] | Promise<WeightEntry[]>;
+    abstract getWeightEntries(): Weight[] | Promise<Weight[]>;
 
-    abstract weightEntry(id: string): WeightEntry | Promise<WeightEntry>;
-
-    abstract getWeightEntriesByUser(): WeightEntry[] | Promise<WeightEntry[]>;
+    abstract Weight(id: string): Weight | Promise<Weight>;
 
     abstract temp__(): boolean | Promise<boolean>;
 }
 
-export class WeightEntry {
-    id?: number;
+export class Weight {
+    id?: string;
     weight?: number;
-    timestamp?: number;
-    author?: Author;
 }

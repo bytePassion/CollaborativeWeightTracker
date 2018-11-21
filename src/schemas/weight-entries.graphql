@@ -1,22 +1,21 @@
 
 type Query {
-    getWeightEntries: [WeightEntry]
-    weightEntry(id: ID!): WeightEntry
-    getWeightEntriesByUser: [WeightEntry]
+    getWeights: [Weight!]!
+    getweight(id: String!): Weight
 }
 
 type Mutation {
-    createWeightEntry(createWeightEntryInput: WeightEntryInput): WeightEntry
+    createWeight(createWeight: WeightInput): Weight
 }
 
-type WeightEntry {
-    id: Int
-    weight: Float
-    timestamp: Int
+type Weight {
+    id: ID
+    created: Date
+    updated: Date
+    weight: Float!
 }
 
 
-input WeightEntryInput {
+input WeightInput {
     weight: Float
-    timestamp: Int
 }
