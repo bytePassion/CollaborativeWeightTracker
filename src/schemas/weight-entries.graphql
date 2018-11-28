@@ -1,7 +1,7 @@
 
 type Query {
     getWeights: [Weight!]!
-    getweight(id: String!): Weight
+    getWeight(id: String!): Weight
 }
 
 type Mutation {
