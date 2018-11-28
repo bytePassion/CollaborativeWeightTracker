@@ -1,11 +1,9 @@
-import {Resolver, Args, Mutation, Query} from "@nestjs/graphql";
-import {WeightService} from "./weight.service";
-import {Weight, WeightInput} from "../graphql.schema";
-import {PubSub} from "graphql-subscriptions";
-import {WeightDTO} from "./dto/create-weight-entry.dto";
+import {Resolver, Args, Mutation, Query} from '@nestjs/graphql';
+import {WeightService} from './weight.service';
+import {Weight, WeightInput} from '../graphql.schema';
+import {PubSub} from 'graphql-subscriptions';
 
 const pubSub = new PubSub();
-
 
 @Resolver('Weight')
 export class WeightsResolver {
@@ -16,18 +14,15 @@ export class WeightsResolver {
         return await this.weightService.showAll();
     }
 
-    @Query('weightEntry')
+    @Query('getWeight')
     async findOneById(@Args('id')id: string): Promise<Weight> {
         return await this.weightService.findOneById(id);
     }
 
     @Mutation('createWeight')
     async create(@Args('createWeight') args: WeightInput): Promise<Weight> {
-        console.log('mutation weight arg: ', args);
         const createdWeight = await this.weightService.create(args);
         pubSub.publish('weightCreated', { weightCreated: createdWeight });
         return createdWeight;
     }
 }
-
-
