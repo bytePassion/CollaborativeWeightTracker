@@ -1,13 +1,13 @@
-import {Resolver, Args, Mutation, Query} from '@nestjs/graphql';
-import {WeightService} from './weight.service';
-import {Weight, WeightInput} from '../graphql.schema';
-import {PubSub} from 'graphql-subscriptions';
+import { Resolver, Args, Mutation, Query } from '@nestjs/graphql';
+import { WeightService } from './weight.service';
+import { Weight, WeightInput } from '../graphql.schema';
+import { PubSub } from 'graphql-subscriptions';
 
 const pubSub = new PubSub();
 
 @Resolver('Weight')
 export class WeightsResolver {
-    constructor(private readonly weightService: WeightService){}
+    constructor(private readonly weightService: WeightService) { }
 
     @Query('getWeights')
     async getWeights() {
@@ -15,7 +15,7 @@ export class WeightsResolver {
     }
 
     @Query('getWeight')
-    async findOneById(@Args('id')id: string): Promise<Weight> {
+    async getWeight(@Args('id') id: string): Promise<Weight> {
         return await this.weightService.findOneById(id);
     }
 

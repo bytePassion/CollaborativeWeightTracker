@@ -6,8 +6,8 @@
   "username": "cwt",
   "password": "cwt",
   "database": "cwt",
-  "synchronize": true,
-  "dropSchema": true,
+  "synchronize": false,
+  "dropSchema": false,
   "logging": false,
   "entities": ["src/**/*.entity.ts", "dist/**/*.entity.js"]
 }
